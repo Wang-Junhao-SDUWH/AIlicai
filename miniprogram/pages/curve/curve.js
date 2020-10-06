@@ -1,6 +1,7 @@
 // pages/statistics2/index.js
 import * as echarts from '../../ec-canvas/echarts';
 
+const app =getApp()
 const db = wx.cloud.database()
 const axcs=db.collection('axcs')
 const cysg=db.collection('cysg')
@@ -155,7 +156,7 @@ function initChart(canvas, width, height, dpr,) {
 			break;
 	}
 	collection_name.where({
-		_openid:"oyRnK5ZTqxOOlUArqGrqZS22RIqQ"
+		_openid:app.globalData.openid
 	}).get().then(res=>{
 		for(let i=0;i<res.data.length;i++){
 			var consume_month=res.data[i].date.getMonth()		//获取月份
@@ -192,7 +193,7 @@ function initChart(canvas, width, height, dpr,) {
 			},
 			yAxis: {
 				type: 'value',
-						name: '收入/元',
+						name: '支出/元',
 						nameTextStyle: {
 							color: 'white',
 							fontWeight: 'normal',
@@ -268,7 +269,7 @@ function initChart(canvas, width, height, dpr,) {
 						shadowBlur: 20
 					}
 				},
-				name: '本年收入情况',
+				name: '本年支出情况',
 				type: 'line',
 				data: output,
 			}]
